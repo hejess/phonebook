@@ -14,6 +14,11 @@ app.use(
   morgan(':method :url :status :res[content-length] - :response-time ms :body')
 )
 
+const cors = require('cors')
+app.use(cors())
+
+app.use(express.static('build'))
+
 let persons = [
   {
     id: 1,
@@ -103,7 +108,7 @@ app.post('/api/persons', (request, response) => {
   persons = persons.concat(person)
   response.json(person)
 })
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3002
 app.listen(PORT, () => {
   console.log(`Aloha, server running on port ${PORT}`)
 })
