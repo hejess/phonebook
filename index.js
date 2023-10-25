@@ -47,24 +47,24 @@ app.get('/info', (request, response) => {
 app.get('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findById(id)
-  .then(person => {
-    if (!person) {
-      response.status(404).end()
-    } else {
-      response.json(person)
-    }
-  })
-  .catch(error => next(error))
+    .then(person => {
+      if (!person) {
+        response.status(404).end()
+      } else {
+        response.json(person)
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findByIdAndDelete(id)
-  .then(result => {
-    console.log(`delete result ${result}`)
-    response.status(204).end()
-  })
-  .catch(error => next(error))
+    .then(result => {
+      console.log(`delete result ${result}`)
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', (request, response, next) => {
@@ -75,23 +75,23 @@ app.post('/api/persons', (request, response, next) => {
     number: body.number
   })
   person.save()
-  .then(person => response.json(person))
-  .catch(error => next(error))
+    .then(person => response.json(person))
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  console.log("put")
+  console.log('put')
   const body = request.body
   const person = {
     name: body.name,
     number: body.number
   }
   const id = request.params.id
-  Person.findByIdAndUpdate(id, person, {new: true})
-  .then(updatedPerson => {
-    response.json(updatedPerson)
-  })
-  .catch(error => next(error))
+  Person.findByIdAndUpdate(id, person, { new: true })
+    .then(updatedPerson => {
+      response.json(updatedPerson)
+    })
+    .catch(error => next(error))
 })
 
 // Error handler should come after route handlers
@@ -106,7 +106,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).json({ error: error.message })
   }
 
-  next(error); // Pass the error to the default error handler for further processing
+  next(error) // Pass the error to the default error handler for further processing
 }
 
 app.use(errorHandler) // This should be the last loaded middleware

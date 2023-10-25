@@ -12,6 +12,9 @@ app.use(express.static('build'))
 
 .env file is required, it should contain the URL to MongoDB
 
+If git push failed:
+ssh-add ~/.ssh/id_ed25519_github
+
 examples:
   {
     id: 1,
@@ -33,4 +36,3 @@ examples:
     name: 'Mary Poppendieck',
     number: '39-23-6423122'
   }
-]
